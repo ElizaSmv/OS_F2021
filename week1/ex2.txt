@@ -1,0 +1,16 @@
+   54  git init
+   55  git add .
+   56  git status
+   57  git add readme
+   58  git status
+   59  git commit -m "first"
+   60  git add --all
+   61  git status
+   62  whoami
+   63  mkdir ~/week1
+   64  cd ~/week1
+   65  ls/usr/bin
+   66  ls /usr/bin
+   67  ls /usr/bin | sort -r > ~/week1/ex1.txt
+   68  ls
+   69  history

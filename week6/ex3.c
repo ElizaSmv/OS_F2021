@@ -1,0 +1,93 @@
+#include <stdio.h>
+#include <limits.h>
+
+#define N 5  //number of processes
+
+typedef struct Process{
+    int at;
+    int bt;
+    int ct;
+    int tat;
+    int wt;
+    int flag;
+} Process;
+
+int main(){
+    int q;
+    Process Pr[N];
+    printf("Quantum: ");
+    scanf("%d",&q);
+    printf("Number of processes %d\n", N);
+    for (int i = 0; i < N; i++) {
+        printf("Arrival time for process %d ", i+1, "\n");
+        scanf("%d", &Pr[i].at);
+        printf("Burst time for process %d ", i+1, "\n");
+        scanf("%d", &Pr[i].bt);
+        Pr[i].wt = 0; Pr[i].tat = 0; Pr[i].ct = 0; Pr[i].flag=0;
+    }
+    for (int i = 0; i < N; i++) { //sort bt
+        for (int j = 0; j < N - i - 1; j++) {
+            if (Pr[j].bt > Pr[j+1].bt){
+                Process t = Pr[j];
+                Pr[j] = Pr[j+1];
+                Pr[j+1] = t;
+            }
+        }
+    }
+    for (int i = 0; i < N; i++) { //sort at
+        for (int k = 0; k < N - i - 1; k++) {
+            if (Pr[k].at > Pr[k+1].at){
+                Process t = Pr[k];
+                Pr[k] = Pr[k+1];
+                Pr[k+1] = t;
+            }
+        }
+    }
+    int total_time = 0;
+    int left = 0; int time = 1;
+    int temp[N];
+    for (int i = 0; i < N; i++) {
+        temp[i] = Pr[i].bt;
+        if (temp[i]<=q){
+            temp[i]=0;
+        } else temp[i]=temp[i]-q;
+    }
+
+
+
+
+    for (int k = 0; k < N; k++) {
+        int min = INT_MAX; //min at
+        int p = -1;
+        for (int i = 0; i < N; i++) {
+            if (Pr[i].at <= min && !Pr[i].flag) {
+                min = Pr[i].at;
+                p = i;
+            }
+        }
+
+        if (min > total_time) {
+            total_time = min;
+            Pr[p].wt = 0;
+        } else {
+            Pr[p].wt = total_time - min;
+        }
+        Pr[p].ct = total_time + Pr[p].bt;
+        total_time = Pr[p].ct;
+        Pr[p].flag = 1;
+        Pr[p].tat = Pr[p].ct - Pr[p].at;
+    }
+    double av_tat = 0, av_wt = 0;
+    printf("P#   AT   BT   CT   TAT   WT\n");
+    printf("\n");
+    for (int i = 0; i < N; i++) {
+        printf("P%d   %d   %d   %d   %d   %d\n", i + 1, Pr[i].at,Pr[i].bt,Pr[i].ct,Pr[i].tat,Pr[i].wt);
+        av_tat += Pr[i].tat;
+        av_wt += Pr[i].wt;
+    }
+    av_tat = av_tat / N;
+    av_wt = av_wt / N;
+    printf("Average TAT %f \n", av_tat);
+    printf("Average WT %f\n", av_wt);
+}
+

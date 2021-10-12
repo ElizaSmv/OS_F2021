@@ -1,0 +1,4 @@
+Difference:
+ Physical address points to the real memory 
+ Virtual address can get a physical address (with the help of page table)
+If virtual address doesn't point to a physical address, then a virtual address can be undefined

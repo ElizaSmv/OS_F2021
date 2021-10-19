@@ -1,0 +1,6 @@
+Hit occur when the referenced page is already in the memory, and miss occur otherwise. Therefore Hit ratio = 1 - Miss ratio.
+
+So, the more identical references in the sequence, and the larger the number of page frames would be,
+the more hit ratio, and the lower miss ratio are.
+And vice versa, the wider pull of references in the sequence, and the smaller the number of page frames would be,
+the lower hit ratio, and the more miss ratio are.

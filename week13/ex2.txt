@@ -1,0 +1,8 @@
+Deadlock recovery is a approach of elimination already happened deadlock.
+
+Recovery strategy  is an approach of detecting and elimination of deadlock.
+This strategy can be better when we can safely take resource away and return it back.
+
+Prevention strategy is a strategy, where we can avoid deadlock's appearance.
+We can be sure that system will never have deadlocks because of this strategy.
+
